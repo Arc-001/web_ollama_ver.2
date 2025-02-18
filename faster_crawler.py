@@ -59,7 +59,7 @@ def embedded_query_langchain(query, vector_store):
     print(la)
     print(lb/la)
     print("------------------------similarity fraction reduction------------------")
-    response = query_with_langchain(str_doc, query, llm_model="llama3.2:3b")
+    response = query_with_langchain(str_doc, query, llm_model="dan")
     return response
 
 def search(query):
@@ -72,5 +72,27 @@ def play(query):
     tts_ = tts()
     tts_.play_audio(response,1)
 
+def play_txt(txt):
+    tts_ = tts()
+    tts_.play_audio(txt,1)
+
+def normal_talk_with_llm():
+    vector_store = get_inmemory_vector_store()
+    tts_ = tts()
+    llm = get_chat_ollama("gemma2:2b")
+    while True:
+        reply = f"The user now asks:"+input("Enter your query: ")
+        # vector_store.add_texts(split_document(reply, chunk_size = 1000, overlap = 10))
+        # response = query_with_langchain(reply, memory, llm_model="llama3.2:1b")
+        # vector_store.add_texts(split_document(response, chunk_size = 1000, overlap = 10))
+        
+        
+        text_stream = map(lambda x : x.content, llm.stream(reply))
+        response = tts_.play_audio_stream(text_stream, voice_num = 1)
+
+
+    
+
 if __name__ == "__main__":
-    play(input("Enter your query: "))
+    normal_talk_with_llm()
+    # play(input("Enter your query: "))
