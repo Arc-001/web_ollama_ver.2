@@ -106,24 +106,27 @@ def process_content_for_llm(content,depth = 5):
 
     return(str(content))
 
-    # try:
-    #     return f"""
-    #     Title: {content['title']}
-    #     Main Content : {' '.join(content['main_content'][:])}
-    #     Key Sections:{' '.join(content['headings'])}
-    #     """
-    # except:
-    #     try:
-    #         return f"""
-    #         Main Content:{' '.join(content['main_content'][:])}
 
-    #         key Sections:{' '.join(content['headings'])}"""
-    #     except:
-    #         try : 
-    #             return str(content)
-    #         except:
-    #             return ""
-    
+    # commented as it was messing with the vector embedding
+    '''
+    try:
+        return f"""
+        Title: {content['title']}
+        Main Content : {' '.join(content['main_content'][:])}
+        Key Sections:{' '.join(content['headings'])}
+        """
+    except:
+        try:
+            return f"""
+            Main Content:{' '.join(content['main_content'][:])}
+
+            key Sections:{' '.join(content['headings'])}"""
+        except:
+            try : 
+                return str(content)
+            except:
+                return ""
+    '''
 
 
 def query_with_embeddings(content, question,depth = 5, model_name="mxbai-embed-large", llm_model="llama3.2:3b"):

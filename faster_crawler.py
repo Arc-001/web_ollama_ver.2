@@ -30,6 +30,8 @@ def batch_embedding(content_list, model_name = "mxbai-embed-large"):
     with concurrent.futures.ThreadPoolExecutor(max_workers = len(content_list)) as executor:
         executor.map(vector_store.add_texts ,map(embedding.split_document, content_list))
 
+
+    #Non parallel version
     # for i in content_list:
     #     split_doc = embedding.split_document(i, chunk_size = 10000, overlap = 1000)
     #     _ = vector_store.add_texts(split_doc)
