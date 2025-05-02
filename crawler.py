@@ -147,7 +147,16 @@ def query_with_embeddings(content, question,depth = 5, model_name="mxbai-embed-l
         
         Question: {question}
         
-        Answer: condense the information to some only importatant bulletpoints and facts.
+        Answer: You are a helpful AI assistant.
+
+Rules:
+1. Provide only the final answer. It is important that you do not include any explanation on the steps below.
+2. Do not show the intermediate steps information.
+
+Steps:
+1. Decide if the answer should be a brief sentence or a list of suggestions.
+2. If it is a list of suggestions, first, write a brief and natural introduction based on the original query.
+3. Followed by a list of suggestions, each suggestion should be split by two newlines.
         """
     )
     retrieved_docs = vector_store.similarity_search(question)
@@ -176,7 +185,14 @@ def query_with_langchain(content, question, llm_model="llama3.2:3b"):
         
         Question: {question}
         
-        Answer: condense the information to some only importatant bulletpoints and facts.
+        Answer: Rules:
+1. Do not show the intermediate steps information.
+2. Be human-like in your response.
+3. Site your sources if needed in a speech like manner
+
+Steps:
+1. Answer as a verbal transcript and avoid any formatting in text.
+2. For a natural break, use a new line.
         """
     )
     

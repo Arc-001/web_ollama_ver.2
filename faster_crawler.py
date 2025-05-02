@@ -64,6 +64,13 @@ def embedded_query_langchain(query, vector_store):
     response = query_with_langchain(str_doc, query, llm_model="dan")
     return response
 
+def all_content_query(query):
+    content = parallel_crawler(parallel_url_extractor(query))
+    print(content)
+    response = query_with_langchain(content, query, llm_model="dan")
+    play_txt(response)
+
+
 def search(query):
     vector_store = parallel_crawler_with_embeddings(query)
     response = embedded_query_langchain(query, vector_store)
@@ -96,5 +103,6 @@ def normal_talk_with_llm():
     
 
 if __name__ == "__main__":
-    normal_talk_with_llm()
-    # play(input("Enter your query: "))
+    #normal_talk_with_llm()
+    play(input("Enter your query: ")) 
+    #all_content_query(input("Enter your query: "))  
